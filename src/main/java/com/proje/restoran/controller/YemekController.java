@@ -29,7 +29,10 @@ public class YemekController {
     @GetMapping("/menu")
     public String menuGoster(@RequestParam int masaNo, Model model) {
         model.addAttribute("masaNo", masaNo);
-        model.addAttribute("yemekler", yemekRepository.findAll());
+        model.addAttribute("anaYemekler", yemekRepository.findByKategori("Ana Yemek"));
+        model.addAttribute("soslar", yemekRepository.findByKategori("Sos"));
+        model.addAttribute("icecekler", yemekRepository.findByKategori("İçecek"));
+        model.addAttribute("tatlilar", yemekRepository.findByKategori("Tatlı"));
         return "menu";
     }
 

@@ -11,9 +11,9 @@ public class Yemek {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String yemekAdi;
     private double fiyat;
+    private String kategori;
 
     public Long getId() {
         return id;
@@ -33,5 +33,13 @@ public class Yemek {
 
     public void setFiyat(double fiyat) {
         this.fiyat = fiyat;
+    }
+
+    public String getKategori() {
+        return kategori;
+    }
+
+    public void setKategori(String kategori) {
+        this.kategori = kategori;
     }
 }

@@ -3,21 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <title>Menü</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
-<h1 th:text="'Masa ' + ${masaNo} + ' Menüsü'"></h1>
+<div class="container">
 
-<ul>
-    <li th:each="yemek : ${yemekler}">
-        <span th:text="${yemek.yemekAdi}"></span> -
-        <span th:text="${yemek.fiyat}"></span> TL
+    <div class="baslik">
+        <h1 th:text="'Masa ' + ${masaNo} + ' Menüsü'"></h1>
+        <p>İstediğiniz ürünleri seçip sipariş verebilirsiniz.</p>
+    </div>
 
-        <a th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
-            Sipariş Ver
-        </a>
-    </li>
-</ul>
+    <div class="kategori">
+        <h2>Ana Yemekler</h2>
+        <div class="kartlar" th:if="${not #lists.isEmpty(anaYemekler)}">
+            <div class="kart" th:each="yemek : ${anaYemekler}">
+                <h3 th:text="${yemek.yemekAdi}"></h3>
+                <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
+                <a class="buton"
+                   th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                    Sipariş Ver
+                </a>
+            </div>
+        </div>
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(anaYemekler)}">Bu kategoride ürün yok.</p>
+    </div>
+
+    <div class="kategori">
+        <h2>Soslar</h2>
+        <div class="kartlar" th:if="${not #lists.isEmpty(soslar)}">
+            <div class="kart" th:each="yemek : ${soslar}">
+                <h3 th:text="${yemek.yemekAdi}"></h3>
+                <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
+                <a class="buton"
+                   th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                    Sipariş Ver
+                </a>
+            </div>
+        </div>
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(soslar)}">Bu kategoride ürün yok.</p>
+    </div>
+
+    <div class="kategori">
+        <h2>İçecekler</h2>
+        <div class="kartlar" th:if="${not #lists.isEmpty(icecekler)}">
+            <div class="kart" th:each="yemek : ${icecekler}">
+                <h3 th:text="${yemek.yemekAdi}"></h3>
+                <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
+                <a class="buton"
+                   th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                    Sipariş Ver
+                </a>
+            </div>
+        </div>
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(icecekler)}">Bu kategoride ürün yok.</p>
+    </div>
+
+    <div class="kategori">
+        <h2>Tatlılar</h2>
+        <div class="kartlar" th:if="${not #lists.isEmpty(tatlilar)}">
+            <div class="kart" th:each="yemek : ${tatlilar}">
+                <h3 th:text="${yemek.yemekAdi}"></h3>
+                <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
+                <a class="buton"
+                   th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                    Sipariş Ver
+                </a>
+            </div>
+        </div>
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(tatlilar)}">Bu kategoride ürün yok.</p>
+    </div>
+
+</div>
 
 </body>
 </html>

@@ -3,27 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Siparişler</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
 
-<h1>Tüm Masa Siparişleri</h1>
+<div class="container">
 
-<div th:each="masaSiparis : ${masaSiparislari}">
-    <h2 th:text="'Masa ' + ${masaSiparis.masaNo}"></h2>
+    <div class="sayfa-baslik">
+        <h1>Tüm Masa Siparişleri</h1>
+        <p>Masalara ait siparişleri buradan görüntüleyebilir ve düzenleyebilirsiniz.</p>
+    </div>
 
-    <ul th:if="${not #lists.isEmpty(masaSiparis.siparisler)}">
-        <li th:each="siparis : ${masaSiparis.siparisler}">
-            <span th:text="${siparis.yemekAdi}"></span> -
-            <span th:text="${siparis.adet}"></span> adet
+    <div class="masa-kutu" th:each="masaSiparis : ${masaSiparislari}">
+        <h2 th:text="'Masa ' + ${masaSiparis.masaNo}"></h2>
 
-            <a th:href="@{/siparis-arttir(id=${siparis.id})}">[+]</a>
-            <a th:href="@{/siparis-sil(id=${siparis.id})}">[-]</a>
-        </li>
-    </ul>
+        <ul class="siparis-listesi" th:if="${not #lists.isEmpty(masaSiparis.siparisler)}">
+            <li class="siparis-item" th:each="siparis : ${masaSiparis.siparisler}">
+                <div class="siparis-bilgi">
+                    <span th:text="${siparis.yemekAdi}"></span> -
+                    <span th:text="${siparis.adet}"></span> adet
+                </div>
 
-    <p th:if="${#lists.isEmpty(masaSiparis.siparisler)}">Sipariş yok</p>
+                <div class="siparis-aksiyon">
+                    <a class="kucuk-buton arttir"
+                       th:href="@{/siparis-arttir(id=${siparis.id})}">
+                        +
+                    </a>
 
-    <hr>
+                    <a class="kucuk-buton azalt"
+                       th:href="@{/siparis-sil(id=${siparis.id})}">
+                        -
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <p class="bos-siparis" th:if="${#lists.isEmpty(masaSiparis.siparisler)}">
+            Sipariş yok
+        </p>
+    </div>
+
 </div>
 
 </body>

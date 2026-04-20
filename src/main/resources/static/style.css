@@ -1,0 +1,183 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #222;
+    padding: 30px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.baslik {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.baslik h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #1f2937;
+}
+
+.baslik p {
+    font-size: 18px;
+    color: #6b7280;
+}
+
+.kategori {
+    margin-bottom: 35px;
+}
+
+.kategori h2 {
+    margin-bottom: 18px;
+    color: #111827;
+    border-left: 6px solid #2563eb;
+    padding-left: 10px;
+}
+
+.kartlar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.kart {
+    background: white;
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    transition: 0.2s ease;
+}
+
+.kart:hover {
+    transform: translateY(-4px);
+}
+
+.kart h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.fiyat {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2563eb;
+    margin-bottom: 15px;
+}
+
+.buton {
+    display: inline-block;
+    text-decoration: none;
+    background: #2563eb;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.buton:hover {
+    background: #1d4ed8;
+}
+
+.bos-mesaj {
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 10px;
+}
+
+.sayfa-baslik {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sayfa-baslik h1 {
+    font-size: 38px;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.sayfa-baslik p {
+    color: #6b7280;
+    font-size: 17px;
+}
+
+.masa-kutu {
+    background: white;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+.masa-kutu h2 {
+    margin-bottom: 14px;
+    color: #111827;
+    border-left: 6px solid #2563eb;
+    padding-left: 10px;
+}
+
+.siparis-listesi {
+    list-style: none;
+    padding-left: 0;
+}
+
+.siparis-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #f9fafb;
+    margin-bottom: 10px;
+}
+
+.siparis-bilgi {
+    font-size: 16px;
+    color: #111827;
+}
+
+.siparis-aksiyon {
+    display: flex;
+    gap: 10px;
+}
+
+.kucuk-buton {
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.arttir {
+    background: #16a34a;
+}
+
+.arttir:hover {
+    background: #15803d;
+}
+
+.azalt {
+    background: #dc2626;
+}
+
+.azalt:hover {
+    background: #b91c1c;
+}
+
+.bos-siparis {
+    color: #6b7280;
+    font-style: italic;
+    padding: 10px 0;
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menü</title>
+</head>
+<body>
+
+<h1 th:text="'Masa ' + ${masaNo} + ' Menüsü'"></h1>
+
+<ul>
+    <li th:each="yemek : ${yemekler}">
+        <span th:text="${yemek.yemekAdi}"></span> -
+        <span th:text="${yemek.fiyat}"></span> TL
+
+        <a th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+            Sipariş Ver
+        </a>
+    </li>
+</ul>
+
+</body>
+</html>

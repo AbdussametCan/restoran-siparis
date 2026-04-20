@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Siparişler</title>
+</head>
+<body>
+
+<h1>Tüm Masa Siparişleri</h1>
+
+<div th:each="masaSiparis : ${masaSiparislari}">
+    <h2 th:text="'Masa ' + ${masaSiparis.masaNo}"></h2>
+
+    <ul th:if="${not #lists.isEmpty(masaSiparis.siparisler)}">
+        <li th:each="siparis : ${masaSiparis.siparisler}">
+            <span th:text="${siparis.yemekAdi}"></span> -
+            <span th:text="${siparis.adet}"></span> adet
+
+            <a th:href="@{/siparis-arttir(id=${siparis.id})}">[+]</a>
+            <a th:href="@{/siparis-sil(id=${siparis.id})}">[-]</a>
+        </li>
+    </ul>
+
+    <p th:if="${#lists.isEmpty(masaSiparis.siparisler)}">Sipariş yok</p>
+
+    <hr>
+</div>
+
+</body>
+</html>

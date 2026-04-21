@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sepet</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="sayfa-baslik">
+        <h1 th:text="'Masa ' + ${masaNo} + ' Sepeti'"></h1>
+        <p>Sepetinizde bulunan ürünleri buradan görebilirsiniz.</p>
+
+        <p th:if="${param.hata != null}"
+           style="color: red; font-weight: bold; margin-top: 10px;">
+            ⚠️ Lütfen sepete ürün ekleyin!
+        </p>
+    </div>
+
+    <div class="masa-kutu">
+        <ul class="siparis-listesi" th:if="${not #lists.isEmpty(sepetUrunleri)}">
+            <li class="siparis-item" th:each="urun : ${sepetUrunleri}">
+                <div class="siparis-bilgi">
+                    <strong th:text="${urun.yemekAdi}"></strong> -
+                    <span th:text="${urun.adet}"></span> adet -
+                    <span th:text="${urun.fiyat * urun.adet}"></span> TL
+                </div>
+
+                <div class="siparis-aksiyon">
+                    <a class="kucuk-buton arttir"
+                       th:href="@{/sepet-arttir(id=${urun.id})}">
+                        +
+                    </a>
+
+                    <a class="kucuk-buton azalt"
+                       th:href="@{/sepet-azalt(id=${urun.id})}">
+                        -
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <p class="bos-siparis" th:if="${#lists.isEmpty(sepetUrunleri)}">
+            Sepetinizde henüz ürün yok.
+        </p>
+
+        <hr style="margin: 20px 0;">
+
+        <h2>Toplam Tutar: <span th:text="${toplamTutar}"></span> TL</h2>
+
+        <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
+
+            <a class="buton" th:href="@{/menu(masaNo=${masaNo})}">
+                Menüye Dön
+            </a>
+
+            <a class="buton"
+               th:if="${not #lists.isEmpty(sepetUrunleri)}"
+               th:href="@{/siparisi-onayla(masaNo=${masaNo})}">
+                Siparişi Oluştur
+            </a>
+
+            <span class="buton pasif-buton"
+                  th:if="${#lists.isEmpty(sepetUrunleri)}">
+                Siparişi Oluştur
+            </span>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

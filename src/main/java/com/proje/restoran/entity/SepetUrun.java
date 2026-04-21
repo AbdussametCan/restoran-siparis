@@ -3,7 +3,7 @@ package com.proje.restoran.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class Siparis {
+public class SepetUrun {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

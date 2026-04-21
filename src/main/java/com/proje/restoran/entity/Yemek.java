@@ -14,6 +14,7 @@ public class Yemek {
     private String yemekAdi;
     private double fiyat;
     private String kategori;
+    private String aciklama;
 
     public Long getId() {
         return id;
@@ -41,5 +42,13 @@ public class Yemek {
 
     public void setKategori(String kategori) {
         this.kategori = kategori;
+    }
+
+    public String getAciklama() {
+        return aciklama;
+    }
+
+    public void setAciklama(String aciklama) {
+        this.aciklama = aciklama;
     }
 }

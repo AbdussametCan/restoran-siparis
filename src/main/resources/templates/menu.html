@@ -10,71 +10,134 @@
 <div class="container">
 
     <div class="baslik">
-        <h1 th:text="'Masa ' + ${masaNo} + ' Menüsü'"></h1>
-        <p>İstediğiniz ürünleri seçip sipariş verebilirsiniz.</p>
+
+        <div class="baslik-sol">
+            <h1>Lezzet Durağı</h1>
+            <p>Masa için özel dijital menüye hoş geldiniz. Dilediğiniz ürünleri seçip sepete ekleyebilirsiniz.</p>
+        </div>
+
+        <div class="baslik-sag">
+            <div class="masa-badge" th:text="'Masa ' + ${masaNo}"></div>
+
+            <a class="buton sepet-buton"
+               th:href="@{/sepet(masaNo=${masaNo})}">
+                🛒 Sepete Git
+            </a>
+        </div>
+
     </div>
 
-    <div class="kategori">
-        <h2>Ana Yemekler</h2>
+    <div class="kategori-linkleri">
+        <a href="#ana-yemekler">🍔 Ana Yemekler</a>
+        <a href="#soslar">🥫 Soslar</a>
+        <a href="#icecekler">🥤 İçecekler</a>
+        <a href="#tatlilar">🍰 Tatlılar</a>
+    </div>
+
+    <div class="kategori" id="ana-yemekler">
+        <div class="kategori-baslik">
+            <span class="kategori-ikon">🍔</span>
+            <h2>Ana Yemekler</h2>
+        </div>
+
         <div class="kartlar" th:if="${not #lists.isEmpty(anaYemekler)}">
             <div class="kart" th:each="yemek : ${anaYemekler}">
                 <h3 th:text="${yemek.yemekAdi}"></h3>
+                <p class="aciklama" th:text="${yemek.aciklama}"></p>
                 <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
                 <a class="buton"
-                   th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
-                    Sipariş Ver
+                   onclick="scrollKaydet()"
+                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                    Sepete Ekle
                 </a>
             </div>
         </div>
+
         <p class="bos-mesaj" th:if="${#lists.isEmpty(anaYemekler)}">Bu kategoride ürün yok.</p>
     </div>
 
-    <div class="kategori">
-        <h2>Soslar</h2>
+    <div class="kategori" id="soslar">
+        <div class="kategori-baslik">
+            <span class="kategori-ikon">🥫</span>
+            <h2>Soslar</h2>
+        </div>
+
         <div class="kartlar" th:if="${not #lists.isEmpty(soslar)}">
             <div class="kart" th:each="yemek : ${soslar}">
                 <h3 th:text="${yemek.yemekAdi}"></h3>
+                <p class="aciklama" th:text="${yemek.aciklama}"></p>
                 <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
                 <a class="buton"
-                   th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
-                    Sipariş Ver
+                   onclick="scrollKaydet()"
+                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                    Sepete Ekle
                 </a>
             </div>
         </div>
+
         <p class="bos-mesaj" th:if="${#lists.isEmpty(soslar)}">Bu kategoride ürün yok.</p>
     </div>
 
-    <div class="kategori">
-        <h2>İçecekler</h2>
+    <div class="kategori" id="icecekler">
+        <div class="kategori-baslik">
+            <span class="kategori-ikon">🥤</span>
+            <h2>İçecekler</h2>
+        </div>
+
         <div class="kartlar" th:if="${not #lists.isEmpty(icecekler)}">
             <div class="kart" th:each="yemek : ${icecekler}">
                 <h3 th:text="${yemek.yemekAdi}"></h3>
+                <p class="aciklama" th:text="${yemek.aciklama}"></p>
                 <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
                 <a class="buton"
-                   th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
-                    Sipariş Ver
+                   onclick="scrollKaydet()"
+                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                    Sepete Ekle
                 </a>
             </div>
         </div>
+
         <p class="bos-mesaj" th:if="${#lists.isEmpty(icecekler)}">Bu kategoride ürün yok.</p>
     </div>
 
-    <div class="kategori">
-        <h2>Tatlılar</h2>
+    <div class="kategori" id="tatlilar">
+        <div class="kategori-baslik">
+            <span class="kategori-ikon">🍰</span>
+            <h2>Tatlılar</h2>
+        </div>
+
         <div class="kartlar" th:if="${not #lists.isEmpty(tatlilar)}">
             <div class="kart" th:each="yemek : ${tatlilar}">
                 <h3 th:text="${yemek.yemekAdi}"></h3>
+                <p class="aciklama" th:text="${yemek.aciklama}"></p>
                 <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
                 <a class="buton"
-                   th:href="@{/siparis-ver(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
-                    Sipariş Ver
+                   onclick="scrollKaydet()"
+                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                    Sepete Ekle
                 </a>
             </div>
         </div>
+
         <p class="bos-mesaj" th:if="${#lists.isEmpty(tatlilar)}">Bu kategoride ürün yok.</p>
     </div>
 
 </div>
+
+<script>
+    function scrollKaydet() {
+        sessionStorage.setItem("menuScroll", window.scrollY);
+    }
+
+    window.addEventListener("load", function () {
+        const scrollPozisyonu = sessionStorage.getItem("menuScroll");
+
+        if (scrollPozisyonu !== null) {
+            window.scrollTo(0, parseInt(scrollPozisyonu));
+            sessionStorage.removeItem("menuScroll");
+        }
+    });
+</script>
 
 </body>
 </html>

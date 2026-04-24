@@ -6,7 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface SiparisRepository extends JpaRepository<Siparis, Long> {
+
     List<Siparis> findByMasaNo(int masaNo);
 
-    Siparis findByMasaNoAndYemekAdi(int masaNo, String yemekAdi);
+    Siparis findByMasaNoAndUrunAdi(int masaNo, String urunAdi);
 }

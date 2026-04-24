@@ -10,7 +10,7 @@ public interface SepetUrunRepository extends JpaRepository<SepetUrun, Long> {
 
     List<SepetUrun> findByMasaNo(int masaNo);
 
-    SepetUrun findByMasaNoAndYemekAdi(int masaNo, String yemekAdi);
+    SepetUrun findByMasaNoAndUrunAdi(int masaNo, String urunAdi);
 
     @Query("SELECT COALESCE(SUM(s.adet * s.fiyat), 0) FROM SepetUrun s WHERE s.masaNo = :masaNo")
     double masaToplamFiyat(int masaNo);

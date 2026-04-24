@@ -10,7 +10,7 @@ public class SepetUrun {
     private Long id;
 
     private int masaNo;
-    private String yemekAdi;
+    private String urunAdi;
     private int adet;
     private double fiyat;
 
@@ -26,12 +26,12 @@ public class SepetUrun {
         this.masaNo = masaNo;
     }
 
-    public String getYemekAdi() {
-        return yemekAdi;
+    public String getUrunAdi() {
+        return urunAdi;
     }
 
-    public void setYemekAdi(String yemekAdi) {
-        this.yemekAdi = yemekAdi;
+    public void setUrunAdi(String urunAdi) {
+        this.urunAdi = urunAdi;
     }
 
     public int getAdet() {
@@ -48,5 +48,10 @@ public class SepetUrun {
 
     public void setFiyat(double fiyat) {
         this.fiyat = fiyat;
+    }
+
+    // 🔥 OOP bonus
+    public double araToplam() {
+        return fiyat * adet;
     }
 }

@@ -3,27 +3,20 @@ package com.proje.restoran.entity;
 import jakarta.persistence.*;
 
 @Entity
-public class Siparis {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "urun_tipi")
+public abstract class Urun {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int masaNo;
     private String urunAdi;
-    private int adet;
+    private String aciklama;
     private double fiyat;
 
     public Long getId() {
         return id;
-    }
-
-    public int getMasaNo() {
-        return masaNo;
-    }
-
-    public void setMasaNo(int masaNo) {
-        this.masaNo = masaNo;
     }
 
     public String getUrunAdi() {
@@ -34,12 +27,12 @@ public class Siparis {
         this.urunAdi = urunAdi;
     }
 
-    public int getAdet() {
-        return adet;
+    public String getAciklama() {
+        return aciklama;
     }
 
-    public void setAdet(int adet) {
-        this.adet = adet;
+    public void setAciklama(String aciklama) {
+        this.aciklama = aciklama;
     }
 
     public double getFiyat() {
@@ -50,8 +43,5 @@ public class Siparis {
         this.fiyat = fiyat;
     }
 
-    // 🔥 OOP bonus
-    public double toplamFiyat() {
-        return fiyat * adet;
-    }
+    public abstract String getKategori();
 }

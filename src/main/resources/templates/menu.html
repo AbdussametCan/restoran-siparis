@@ -10,7 +10,6 @@
 <div class="container">
 
     <div class="baslik">
-
         <div class="baslik-sol">
             <h1>Lezzet Durağı</h1>
             <p>Masa için özel dijital menüye hoş geldiniz. Dilediğiniz ürünleri seçip sepete ekleyebilirsiniz.</p>
@@ -24,7 +23,6 @@
                 🛒 Sepete Git
             </a>
         </div>
-
     </div>
 
     <div class="kategori-linkleri">
@@ -42,12 +40,13 @@
 
         <div class="kartlar" th:if="${not #lists.isEmpty(anaYemekler)}">
             <div class="kart" th:each="yemek : ${anaYemekler}">
-                <h3 th:text="${yemek.yemekAdi}"></h3>
+                <h3 th:text="${yemek.urunAdi}"></h3>
                 <p class="aciklama" th:text="${yemek.aciklama}"></p>
                 <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
+
                 <a class="buton"
                    onclick="scrollKaydet()"
-                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.urunAdi})}">
                     Sepete Ekle
                 </a>
             </div>
@@ -63,13 +62,14 @@
         </div>
 
         <div class="kartlar" th:if="${not #lists.isEmpty(soslar)}">
-            <div class="kart" th:each="yemek : ${soslar}">
-                <h3 th:text="${yemek.yemekAdi}"></h3>
-                <p class="aciklama" th:text="${yemek.aciklama}"></p>
-                <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
+            <div class="kart" th:each="sos : ${soslar}">
+                <h3 th:text="${sos.urunAdi}"></h3>
+                <p class="aciklama" th:text="${sos.aciklama}"></p>
+                <div class="fiyat" th:text="${sos.fiyat} + ' TL'"></div>
+
                 <a class="buton"
                    onclick="scrollKaydet()"
-                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${sos.urunAdi})}">
                     Sepete Ekle
                 </a>
             </div>
@@ -85,13 +85,14 @@
         </div>
 
         <div class="kartlar" th:if="${not #lists.isEmpty(icecekler)}">
-            <div class="kart" th:each="yemek : ${icecekler}">
-                <h3 th:text="${yemek.yemekAdi}"></h3>
-                <p class="aciklama" th:text="${yemek.aciklama}"></p>
-                <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
+            <div class="kart" th:each="icecek : ${icecekler}">
+                <h3 th:text="${icecek.urunAdi}"></h3>
+                <p class="aciklama" th:text="${icecek.aciklama}"></p>
+                <div class="fiyat" th:text="${icecek.fiyat} + ' TL'"></div>
+
                 <a class="buton"
                    onclick="scrollKaydet()"
-                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${icecek.urunAdi})}">
                     Sepete Ekle
                 </a>
             </div>
@@ -107,13 +108,14 @@
         </div>
 
         <div class="kartlar" th:if="${not #lists.isEmpty(tatlilar)}">
-            <div class="kart" th:each="yemek : ${tatlilar}">
-                <h3 th:text="${yemek.yemekAdi}"></h3>
-                <p class="aciklama" th:text="${yemek.aciklama}"></p>
-                <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
+            <div class="kart" th:each="tatli : ${tatlilar}">
+                <h3 th:text="${tatli.urunAdi}"></h3>
+                <p class="aciklama" th:text="${tatli.aciklama}"></p>
+                <div class="fiyat" th:text="${tatli.fiyat} + ' TL'"></div>
+
                 <a class="buton"
                    onclick="scrollKaydet()"
-                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.yemekAdi})}">
+                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${tatli.urunAdi})}">
                     Sepete Ekle
                 </a>
             </div>

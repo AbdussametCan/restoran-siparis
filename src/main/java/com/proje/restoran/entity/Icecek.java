@@ -4,11 +4,11 @@ import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 
 @Entity
-@DiscriminatorValue("YEMEK")
-public class Yemek extends Urun {
+@DiscriminatorValue("ICECEK")
+public class Icecek extends Urun {
 
     @Override
     public String getKategori() {
-        return "Ana Yemek";
+        return "İçecek";
     }
 }

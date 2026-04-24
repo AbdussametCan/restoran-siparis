@@ -46,9 +46,9 @@
                 <ul class="siparis-listesi" th:if="${not #lists.isEmpty(masaSiparis.siparisler)}">
                     <li class="siparis-item" th:each="siparis : ${masaSiparis.siparisler}">
                         <div class="siparis-bilgi">
-                            <strong th:text="${siparis.yemekAdi}"></strong> -
+                            <strong th:text="${siparis.urunAdi}"></strong> -
                             <span th:text="${siparis.adet}"></span> adet -
-                            <span th:text="${siparis.fiyat * siparis.adet} + ' TL'"></span>
+                            <span th:text="${siparis.toplamFiyat()}"></span> TL
                         </div>
 
                         <div class="siparis-aksiyon">
@@ -88,6 +88,11 @@
 <script>
     function detayGoster(button) {
         const secilenKart = button.closest(".kasa-kart");
+        const masaNo = secilenKart.querySelector("h2").innerText.replace("Masa ", "");
+
+        // 🔥 seçili masayı kaydet
+        sessionStorage.setItem("aktifMasa", masaNo);
+
         const tumKartlar = document.querySelectorAll(".kasa-kart");
         const detay = secilenKart.querySelector(".kasa-detay");
 
@@ -101,6 +106,24 @@
         detay.style.display = "block";
         button.style.display = "none";
     }
+    window.addEventListener("load", function () {
+        const aktifMasa = sessionStorage.getItem("aktifMasa");
+
+        if (aktifMasa) {
+            const kartlar = document.querySelectorAll(".kasa-kart");
+
+            kartlar.forEach(kart => {
+                const masaText = kart.querySelector("h2").innerText;
+
+                if (masaText.includes(aktifMasa)) {
+                    const buton = kart.querySelector(".detay-buton");
+                    if (buton) {
+                        buton.click(); // 🔥 tekrar aç
+                    }
+                }
+            });
+        }
+    });
 
     function tumMasalariGoster() {
         const tumKartlar = document.querySelectorAll(".kasa-kart");

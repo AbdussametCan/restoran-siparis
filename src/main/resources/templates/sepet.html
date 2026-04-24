@@ -10,8 +10,8 @@
 <div class="container">
 
     <div class="sayfa-baslik">
-        <h1 th:text="'Masa ' + ${masaNo} + ' Sepeti'"></h1>
-        <p>Sepetinizde bulunan ürünleri buradan görebilirsiniz.</p>
+        <h1 th:text="'Masa ' + ${masaNo}"></h1>
+        <p>Sepetinizi ve önceki siparişlerinizi buradan görüntüleyebilirsiniz.</p>
 
         <p th:if="${param.hata != null}"
            style="color: red; font-weight: bold; margin-top: 10px;">
@@ -20,12 +20,14 @@
     </div>
 
     <div class="masa-kutu">
+        <h2>Mevcut Sepet</h2>
+
         <ul class="siparis-listesi" th:if="${not #lists.isEmpty(sepetUrunleri)}">
             <li class="siparis-item" th:each="urun : ${sepetUrunleri}">
                 <div class="siparis-bilgi">
-                    <strong th:text="${urun.yemekAdi}"></strong> -
+                    <strong th:text="${urun.urunAdi}"></strong> -
                     <span th:text="${urun.adet}"></span> adet -
-                    <span th:text="${urun.fiyat * urun.adet}"></span> TL
+                    <span th:text="${urun.araToplam()}"></span> TL
                 </div>
 
                 <div class="siparis-aksiyon">
@@ -51,7 +53,6 @@
         <h2>Toplam Tutar: <span th:text="${toplamTutar}"></span> TL</h2>
 
         <div style="margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap;">
-
             <a class="buton" th:href="@{/menu(masaNo=${masaNo})}">
                 Menüye Dön
             </a>
@@ -66,8 +67,25 @@
                   th:if="${#lists.isEmpty(sepetUrunleri)}">
                 Siparişi Oluştur
             </span>
-
         </div>
+    </div>
+
+    <div class="masa-kutu">
+        <h2>Önceki Siparişler</h2>
+
+        <ul class="siparis-listesi" th:if="${not #lists.isEmpty(oncekiSiparisler)}">
+            <li class="siparis-item" th:each="siparis : ${oncekiSiparisler}">
+                <div class="siparis-bilgi">
+                    <strong th:text="${siparis.urunAdi}"></strong> -
+                    <span th:text="${siparis.adet}"></span> adet -
+                    <span th:text="${siparis.toplamFiyat()}"></span> TL
+                </div>
+            </li>
+        </ul>
+
+        <p class="bos-siparis" th:if="${#lists.isEmpty(oncekiSiparisler)}">
+            Bu masa için daha önce oluşturulmuş sipariş yok.
+        </p>
     </div>
 
 </div>

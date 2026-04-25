@@ -126,6 +126,8 @@
     });
 
     function tumMasalariGoster() {
+        sessionStorage.removeItem("aktifMasa");
+
         const tumKartlar = document.querySelectorAll(".kasa-kart");
 
         tumKartlar.forEach(kart => {

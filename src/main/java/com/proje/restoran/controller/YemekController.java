@@ -11,6 +11,7 @@ import com.proje.restoran.repository.SiparisRepository;
 import com.proje.restoran.repository.SosRepository;
 import com.proje.restoran.repository.TatliRepository;
 import com.proje.restoran.repository.YemekRepository;
+import com.proje.restoran.repository.KizartmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +40,9 @@ public class YemekController {
     private SepetUrunRepository sepetUrunRepository;
 
     @Autowired
+    private KizartmaRepository kizartmaRepository;
+
+    @Autowired
     private SiparisRepository siparisRepository;
 
     @Autowired
@@ -51,6 +55,7 @@ public class YemekController {
         model.addAttribute("icecekler", icecekRepository.findAll());
         model.addAttribute("soslar", sosRepository.findAll());
         model.addAttribute("tatlilar", tatliRepository.findAll());
+        model.addAttribute("kizartmalar", kizartmaRepository.findAll());
 
         return "menu";
     }
@@ -226,6 +231,10 @@ public class YemekController {
 
         if (urun == null) {
             urun = sosRepository.findByUrunAdi(urunAdi);
+        }
+
+        if (urun == null) {
+            urun = kizartmaRepository.findByUrunAdi(urunAdi);
         }
 
         if (urun == null) {

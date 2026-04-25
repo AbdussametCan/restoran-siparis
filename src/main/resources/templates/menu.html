@@ -27,6 +27,7 @@
 
     <div class="kategori-linkleri">
         <a href="#ana-yemekler">🍔 Ana Yemekler</a>
+        <a href="#kizartmalar">🍟 Kızartmalar</a>
         <a href="#soslar">🥫 Soslar</a>
         <a href="#icecekler">🥤 İçecekler</a>
         <a href="#tatlilar">🍰 Tatlılar</a>
@@ -53,6 +54,31 @@
         </div>
 
         <p class="bos-mesaj" th:if="${#lists.isEmpty(anaYemekler)}">Bu kategoride ürün yok.</p>
+    </div>
+
+    <div class="kategori" id="kizartmalar">
+        <div class="kategori-baslik">
+            <span class="kategori-ikon">🍟</span>
+            <h2>Kızartmalar</h2>
+        </div>
+
+        <div class="kartlar" th:if="${not #lists.isEmpty(kizartmalar)}">
+            <div class="kart" th:each="kizartma : ${kizartmalar}">
+                <h3 th:text="${kizartma.urunAdi}"></h3>
+                <p class="aciklama" th:text="${kizartma.aciklama}"></p>
+                <div class="fiyat" th:text="${kizartma.fiyat} + ' TL'"></div>
+
+                <a class="buton"
+                   onclick="scrollKaydet()"
+                   th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${kizartma.urunAdi})}">
+                    Sepete Ekle
+                </a>
+            </div>
+        </div>
+
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(kizartmalar)}">
+            Bu kategoride ürün yok.
+        </p>
     </div>
 
     <div class="kategori" id="soslar">

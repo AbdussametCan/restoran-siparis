@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sipariş Onaylandı</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="masa-kutu" style="text-align:center; padding:40px;">
+
+        <h1 style="color:#16a34a; margin-bottom:20px;">
+            ✅ Siparişiniz Başarıyla Oluşturuldu
+        </h1>
+
+        <p style="font-size:18px; margin-bottom:10px;">
+            Siparişleriniz garsonlarımız tarafından masanıza getirilecektir.
+        </p>
+
+        <p style="font-size:18px; font-weight:bold; margin-bottom:25px;">
+            Afiyet olsun 🍽️
+        </p>
+
+        <div style="margin-top:20px;">
+            <a class="buton" th:href="@{/menu(masaNo=${masaNo})}">
+                Menüye Geri Dön
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

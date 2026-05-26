@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Kasa Ekranı</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="sayfa-baslik">
+        <h1>Kasa Ekranı</h1>
+        <p>Masalara ait siparişleri buradan takip edebilirsiniz.</p>
+    </div>
+
+    <div class="kasa-grid" id="kasaGrid">
+        <div class="kasa-kart" th:each="masaSiparis : ${masaSiparislari}">
+
+            <div class="kasa-kart-baslik">
+                <h2 th:text="'Masa ' + ${masaSiparis.masaNo}"></h2>
+
+                <span class="durum-badge"
+                      th:classappend="${#lists.isEmpty(masaSiparis.siparisler)} ? ' bos' : ' dolu'"
+                      th:text="${#lists.isEmpty(masaSiparis.siparisler)} ? 'Boş' : 'Dolu'">
+                </span>
+            </div>
+
+            <div class="kasa-ozet">
+                <p>
+                    Toplam Ürün:
+                    <strong th:text="${#lists.size(masaSiparis.siparisler)}"></strong>
+                </p>
+
+                <p>
+                    Toplam Tutar:
+                    <strong th:text="${masaSiparis.toplamTutar} + ' TL'"></strong>
+                </p>
+            </div>
+
+            <button class="detay-buton" type="button" onclick="detayGoster(this)">
+                Detayı Gör
+            </button>
+
+            <div class="kasa-detay">
+                <ul class="siparis-listesi" th:if="${not #lists.isEmpty(masaSiparis.siparisler)}">
+                    <li class="siparis-item" th:each="siparis : ${masaSiparis.siparisler}">
+                        <div class="siparis-bilgi">
+                            <strong th:text="${siparis.urunAdi}"></strong> -
+                            <span th:text="${siparis.adet}"></span> adet -
+                            <span th:text="${siparis.toplamFiyat()}"></span> TL
+                        </div>
+
+                        <div class="siparis-aksiyon">
+                            <a class="kucuk-buton arttir"
+                               th:href="@{/siparis-arttir(id=${siparis.id})}">
+                                +
+                            </a>
+
+                            <a class="kucuk-buton azalt"
+                               th:href="@{/siparis-sil(id=${siparis.id})}">
+                                -
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+
+                <p class="bos-siparis" th:if="${#lists.isEmpty(masaSiparis.siparisler)}">
+                    Bu masada henüz sipariş yok.
+                </p>
+
+                <a class="odeme-buton"
+                   th:if="${not #lists.isEmpty(masaSiparis.siparisler)}"
+                   th:href="@{/odeme-alindi(masaNo=${masaSiparis.masaNo})}">
+                    Ödeme Alındı
+                </a>
+
+                <button class="geri-buton" type="button" onclick="tumMasalariGoster()">
+                    Geri Dön
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function detayGoster(button) {
+        const secilenKart = button.closest(".kasa-kart");
+        const masaNo = secilenKart.querySelector("h2").innerText.replace("Masa ", "");
+
+        // 🔥 seçili masayı kaydet
+        sessionStorage.setItem("aktifMasa", masaNo);
+
+        const tumKartlar = document.querySelectorAll(".kasa-kart");
+        const detay = secilenKart.querySelector(".kasa-detay");
+
+        tumKartlar.forEach(kart => {
+            if (kart !== secilenKart) {
+                kart.style.display = "none";
+            }
+        });
+
+        secilenKart.classList.add("tek-kart");
+        detay.style.display = "block";
+        button.style.display = "none";
+    }
+    window.addEventListener("load", function () {
+        const aktifMasa = sessionStorage.getItem("aktifMasa");
+
+        if (aktifMasa) {
+            const kartlar = document.querySelectorAll(".kasa-kart");
+
+            kartlar.forEach(kart => {
+                const masaText = kart.querySelector("h2").innerText;
+
+                if (masaText.includes(aktifMasa)) {
+                    const buton = kart.querySelector(".detay-buton");
+                    if (buton) {
+                        buton.click(); // 🔥 tekrar aç
+                    }
+                }
+            });
+        }
+    });
+
+    function tumMasalariGoster() {
+        sessionStorage.removeItem("aktifMasa");
+
+        const tumKartlar = document.querySelectorAll(".kasa-kart");
+
+        tumKartlar.forEach(kart => {
+            kart.style.display = "flex";
+            kart.classList.remove("tek-kart");
+
+            const detay = kart.querySelector(".kasa-detay");
+            const buton = kart.querySelector(".detay-buton");
+
+            detay.style.display = "none";
+            buton.style.display = "inline-block";
+        });
+    }
+</script>
+
+</body>
+</html>

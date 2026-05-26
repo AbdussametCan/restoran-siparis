@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menü</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+
+    <div class="baslik">
+        <div class="baslik-sol">
+            <h1>Lezzet Durağı</h1>
+            <p>Masa için özel dijital menüye hoş geldiniz. Dilediğiniz ürünleri seçip sepete ekleyebilirsiniz.</p>
+        </div>
+
+        <div class="baslik-sag">
+            <div class="masa-badge" th:text="'Masa ' + ${masaNo}"></div>
+            <a class="buton sepet-buton" th:href="@{/sepet(masaNo=${masaNo})}">🛒 Sepete Git</a>
+        </div>
+    </div>
+
+    <div class="kategori-linkleri">
+        <a href="#ana-yemekler">🍔 Ana Yemekler</a>
+        <a href="#kizartmalar">🍟 Kızartmalar</a>
+        <a href="#soslar">🥫 Soslar</a>
+        <a href="#icecekler">🥤 İçecekler</a>
+        <a href="#tatlilar">🍰 Tatlılar</a>
+    </div>
+
+    <div class="kategori" id="ana-yemekler">
+        <div class="kategori-baslik">
+            <span class="kategori-ikon">🍔</span><h2>Ana Yemekler</h2>
+        </div>
+
+        <div class="kartlar" th:if="${not #lists.isEmpty(anaYemekler)}">
+            <div class="kart" th:each="yemek : ${anaYemekler}">
+                <div class="urun-resim-kutusu" style="width: 100%; height: 150px; overflow: hidden; border-radius: 8px 8px 0 0;">
+                    <img th:src="${yemek.resimUrl != null} ? '/images/' + ${yemek.resimUrl} : '/images/default.jpg'" alt="Yemek Görseli" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 th:text="${yemek.urunAdi}"></h3>
+                <p class="aciklama" th:text="${yemek.aciklama}"></p>
+                <div class="fiyat" th:text="${yemek.fiyat} + ' TL'"></div>
+                <a class="buton" onclick="scrollKaydet()" th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${yemek.urunAdi})}">Sepete Ekle</a>
+            </div>
+        </div>
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(anaYemekler)}">Bu kategoride ürün yok.</p>
+    </div>
+
+    <div class="kategori" id="kizartmalar">
+        <div class="kategori-baslik">
+            <h2><span class="kategori-ikon">🍟</span> Kızartmalar</h2>
+        </div>
+
+        <div class="kartlar" th:if="${not #lists.isEmpty(kizartmalar)}">
+            <div class="kart" th:each="kizartma : ${kizartmalar}">
+                <div class="urun-resim-kutusu" style="width: 100%; height:150px; overflow:hidden; border-radius: 8px 8px 0 0;">
+                    <img th:src="${kizartma.resimUrl != null} ? '/images/' + ${kizartma.resimUrl} : '/images/default.jpg'" alt="Yemek Görseli" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 th:text="${kizartma.urunAdi}"></h3>
+                <p class="aciklama" th:text="${kizartma.aciklama}"></p>
+                <div class="fiyat" th:text="${kizartma.fiyat} + ' TL'"></div>
+                <a class="buton" onclick="scrollKaydet()" th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${kizartma.urunAdi})}">Sepete Ekle</a>
+            </div>
+        </div>
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(kizartmalar)}">Bu kategoride ürün yok.</p>
+    </div>
+
+    <div class="kategori" id="soslar">
+        <div class="kategori-baslik">
+            <span class="kategori-ikon">🥫</span> <h2>Soslar</h2>
+        </div>
+
+        <div class="kartlar" th:if="${not #lists.isEmpty(soslar)}">
+            <div class="kart" th:each="sos : ${soslar}">
+                <div class="urun-resim-kutusu" style="width: 100%; height: 150px; overflow: hidden; border-radius: 8px 8px 0 0;">
+                    <img th:src="${sos.resimUrl != null} ? '/images/' + ${sos.resimUrl} : '/images/default.jpg'" alt="resim" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 th:text="${sos.urunAdi}"></h3>
+                <p class="aciklama" th:text="${sos.aciklama}"></p>
+                <div class="fiyat" th:text="${sos.fiyat} + ' TL'"></div>
+                <a class="buton" onclick="scrollKaydet()" th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${sos.urunAdi})}">Sepete Ekle</a>
+            </div>
+        </div>
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(soslar)}">Bu kategoride ürün yok.</p>
+    </div>
+
+    <div class="kategori" id="icecekler">
+        <div class="kategori-baslik">
+            <span class="kategori-ikon">🥤</span> <h2>İçecekler</h2>
+        </div>
+
+        <div class="kartlar" th:if="${not #lists.isEmpty(icecekler)}">
+            <div class="kart" th:each="icecek : ${icecekler}">
+                <div class="urun-resim-kutusu" style="width: 100%; height: 150px; overflow: hidden; border-radius: 8px 8px 0 0;">
+                    <img th:src="${icecek.resimUrl != null} ? '/images/' + ${icecek.resimUrl} : '/images/default.jpg'" alt="Yemek Görseli" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 th:text="${icecek.urunAdi}"></h3>
+                <p class="aciklama" th:text="${icecek.aciklama}"></p>
+                <div class="fiyat" th:text="${icecek.fiyat} + ' TL' "></div>
+                <a class="buton" onclick="scrollKaydet()" th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${icecek.urunAdi})}">Sepete Ekle</a>
+            </div>
+        </div>
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(icecekler)}">Bu kategoride ürün yok.</p>
+    </div>
+
+    <div class="kategori" id="tatlilar">
+        <div class="kategori-baslik">
+            <span class="kategori-ikon">🍰</span> <h2>Tatlılar</h2>
+        </div>
+
+        <div class="kartlar" th:if="${not #lists.isEmpty(tatlilar)}">
+            <div class="kart" th:each="tatli : ${tatlilar}">
+                <div class="urun-resim-kutusu" style="width: 100%; height: 150px; overflow: hidden; border-radius: 8px 8px 0 0;">
+                    <img th:src="${tatli.resimUrl != null} ? '/images/' + ${tatli.resimUrl} : '/images/default.jpg'" alt="Yemek Görseli" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 th:text="${tatli.urunAdi}"></h3>
+                <p class="aciklama" th:text="${tatli.aciklama}"></p>
+                <div class="fiyat" th:text="${tatli.fiyat} + ' TL'"></div>
+                <a class="buton" onclick="scrollKaydet()" th:href="@{/sepete-ekle(masaNo=${masaNo}, yemekAdi=${tatli.urunAdi})}">Sepete Ekle</a>
+            </div>
+        </div>
+        <p class="bos-mesaj" th:if="${#lists.isEmpty(tatlilar)}">Bu kategoride ürün yok.</p>
+    </div>
+
+</div>
+
+<script>
+    function scrollKaydet() {
+        sessionStorage.setItem("menuScroll", window.scrollY);
+    }
+    window.addEventListener("load", function () {
+        const scrollPozisyonu = sessionStorage.getItem("menuScroll");
+        if (scrollPozisyonu !== null) {
+            window.scrollTo(0, parseInt(scrollPozisyonu));
+            sessionStorage.removeItem("menuScroll");
+        }
+    });
+</script>
+
+</body>
+</html>
